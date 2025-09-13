@@ -1,57 +1,62 @@
-<div class="container my-4">
-    <label>Rate:</label> {{ rate }} <br>
-    <label for="numSubmeters">Number of Submeters:</label>
-    <input id="numSubmeters" type="number" min="1" [(ngModel)]="numberOfSubmeters" (input)="updateSubmetersCount()" />
-
+<div class="container">
+    <label class="label label-primary"><strong>Rate: Rs. {{ rate }} / Unit</strong></label><br>
+    <div class="form-group row">
+      <div class="col-xs-2">
+        <label for="numSubmeters" class="label label-primary"><strong>Number of Submeters:</strong></label>
+        <input class="form-control" id="numSubmeters" type="number" min="1" [(ngModel)]="numberOfSubmeters" (input)="updateSubmetersCount()" />
+      </div>
+    </div>
     <div style="max-width: 700px; margin: 20px auto; font-family: Arial, sans-serif;">
-      <h2 class="mb-4">Billing Summary</h2>
-      <button class="btn btn-primary" (click)="calculateTotals()">calculate</button>
-      <table border="1" cellpadding="8" cellspacing="0" style="width: 100%; border-collapse: collapse; text-align: center;">
-        <thead>
-          <tr>
-            <th>Meter</th>
-            <th>Present</th>
-            <th>Previous</th>
-            <th>Units</th>
-            <th>Amount</th>
-            <th>Actual Payable Amount</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Master</td>
-            <td><input type="number" [(ngModel)]="presentRDG" (input)="calculateTotalUnits()" /></td>
-            <td><input type="number" [(ngModel)]="previousRDG" (input)="calculateTotalUnits()" /></td>
-            <td>{{ totalUnits }}</td>
-            <td colspan="2">{{ billAmount }}</td>
-          </tr>
-    
-          <tr *ngFor="let submeter of submeters; let i = index">
-            <td>Submeter {{ i + 1 }}</td>
-            <td><input type="number" [(ngModel)]="submeter.presentRDG" (input)="calculate()" /></td>
-            <td><input type="number" [(ngModel)]="submeter.previousRDG" (input)="calculate()" /></td>
-            <td>{{ submeter.units }}</td>
-            <td>{{ submeter.subMeterAmount }}</td>
-            <td>{{submeter.subMeterAmount}}+({{remainingAmount}}/{{ numberOfSubmeters }})={{ submeter.actualAmount }}</td>
-          </tr>
-
-          <tr>
-            <td>Remaining Units</td>
-            <td>{{ remainingUnits }}</td>
-          </tr>
-
-          <tr>
-            <td>Remaining Amount</td>
-            <td>{{ remainingAmount }}</td>
-            <!-- <img src="../../assets/NEA.jpg" alt="NEA" width="500" height="600"> -->
-          </tr>
-
-          <tr>
-            <td>Each Remaining Amount</td>
-            <td>{{ remainingAmount }} / {{ numberOfSubmeters }} = {{ remainingAmount / numberOfSubmeters }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <h2 style="text-align: center;">NEA Billing Application</h2>
+      <button class="btn btn-primary" (click)="calculateTotals()">Calculate</button>
+      <div class="table-responsive">
+        <table cellpadding="8" cellspacing="0" style="width: 100%; border-collapse: collapse; text-align: center;">
+          <thead>
+            <tr>
+              <th>Meter</th>
+              <th>Present</th>
+              <th>Previous</th>
+              <th>Units</th>
+              <th>Amount</th>
+              <th>Actual Payable Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Master Meter</strong></td>
+              <td><input class="form-control" type="number" min="1" [(ngModel)]="presentRDG" (input)="calculateTotalUnits()" /></td>
+              <td><input class="form-control" type="number" min="1" [(ngModel)]="previousRDG" (input)="calculateTotalUnits()" /></td>
+              <td>{{ totalUnits }}</td>
+              <td colspan="2">{{ billAmount }}</td>
+            </tr>
+      
+            <tr *ngFor="let submeter of submeters; let i = index">
+              <td>Submeter {{ i + 1 }}</td>
+              <td><input class="form-control"  type="number" min="1" [(ngModel)]="submeter.presentRDG" (input)="calculate()" /></td>
+              <td><input class="form-control"  type="number" min="1" [(ngModel)]="submeter.previousRDG" (input)="calculate()" /></td>
+              <td>{{ submeter.units }}</td>
+              <td>{{ submeter.subMeterAmount }}</td>
+              <td>{{submeter.subMeterAmount}}+({{remainingAmount}}/{{ numberOfSubmeters }})={{ submeter.actualAmount }}</td>
+            </tr>
+  
+            <tr>
+              <td>Remaining Units</td>
+              <td>{{ remainingUnits }}</td>
+            </tr>
+  
+            <tr>
+              <td>Remaining Amount</td>
+              <td>{{ remainingAmount }}</td>
+              <!-- <img src="../../assets/NEA.jpg" alt="NEA"> -->
+            </tr>
+  
+            <tr>
+              <td>Each Remaining Amount</td>
+              <td>{{ remainingAmount }} / {{ numberOfSubmeters }} = {{ remainingAmount / numberOfSubmeters }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
     
   </div>
