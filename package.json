@@ -6,7 +6,9 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "github-build": "ng build --configuration production --base-href 'https://darkassasin.github.io/billing-app'",
+    "github-deploy": "npx angular-cli-ghpages --dir=dist/billing-app"
   },
   "private": true,
   "dependencies": {
